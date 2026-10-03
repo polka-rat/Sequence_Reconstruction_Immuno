@@ -4,7 +4,7 @@
 
 ### 3.1 Experimental Design
 
-Our analysis evaluates the performance of sequence reconstruction algorithms across different communication channels by determining the minimum number of traces (N) required to recover a transmitted sequence with high reliability. We conducted systematic trials for the Bitwise Majority Voting (BMA) algorithm and the Progressive Filtering Method (PFM) across multiple channels: W1, W2, and W3.
+Our analysis evaluates the performance of sequence reconstruction algorithms across different communication channels by determining the minimum number of traces (N) required to recover a transmitted sequence with high reliability. We conducted systematic trials for the Bit-Wise Mode (BWM) algorithm and the Prefix Filtering Mode (PFM) across multiple channels: W1, W2, and W3.
 
 ### 3.2 Trial Structure
 
@@ -14,7 +14,7 @@ Each trial follows a standardized protocol:
 
 2. **Channel Simulation**: The sequence X is transmitted through a selected channel model N times, generating N corrupted traces. Each trace represents a realization of the channel's stochastic behavior.
 
-3. **Reconstruction Algorithm**: The estimation algorithm (either BMA or PFM) processes the N traces to produce a reconstructed sequence estimate $\hat{X}$.
+3. **Reconstruction Algorithm**: The estimation algorithm (either BWM or PFM) processes the N traces to produce a reconstructed sequence estimate $\hat{X}$.
 
 4. **Error Detection**: We record whether the reconstructed sequence exactly matches the original sequence. A trial results in an error if $\hat{X} \neq X$ and a success if $\hat{X} = X$.
 
@@ -23,13 +23,12 @@ Each trial follows a standardized protocol:
 Rather than using a fixed number of trials, we employ an adaptive sampling approach to efficiently explore the parameter space while collecting sufficient error statistics:
 
 **Phase 1: Coarse Scanning**
-- Begin with a moderate number of traces (N = 10 for BMA, N = 5 for PFM)
-- Use large step sizes (step = 10 for BMA, step = 5 for PFM)
+- Begin with a moderate number of traces
 - Continue until the error probability drops below the target threshold (e.g., 0.01 for delta experiments)
 
 **Phase 2: Threshold Refinement**
 - Once a threshold region is identified, backtrack to the approximate crossover point
-- Reduce step size to refine precision (step = 10 for BMA, step = 5 for PFM)
+- Reduce step size to refine precision 
 - Reset and re-scan with higher resolution to precisely locate the performance boundary
 
 This two-phase approach balances computational efficiency with precision, avoiding wasteful trials in regions where performance is clearly well above or below the target.
